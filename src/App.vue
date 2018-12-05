@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <navigation></navigation>    
+    <navigation :authenticated="authenticated" @logout="isAuthenticated"></navigation>    
     <router-view/>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import Navigation from '@/components/Navigation.vue'
 
 @Component({
@@ -15,6 +15,16 @@ import Navigation from '@/components/Navigation.vue'
   },
 })
 export default class App extends Vue {
+  authenticated: boolean = false
+
+  created(){
+    this.isAuthenticated()
+  }
+
+  @Watch('$route')
+  async isAuthenticated() {
+    this.authenticated = await this.$auth.isAuthenticated()
+  }
 
 }
 </script>
