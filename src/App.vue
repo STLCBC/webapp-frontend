@@ -1,7 +1,10 @@
 <template>
   <div id="app">
-    <navigation :authenticated="authenticated" @logout="isAuthenticated"></navigation>    
-    <router-view/>
+    <navigation :authenticated="authenticated" @logout="isAuthenticated"></navigation>
+    <div class="container mx-auto">
+      <router-view/>
+    </div>    
+    
   </div>
 </template>
 
@@ -17,7 +20,7 @@ import Navigation from '@/components/Navigation.vue'
 export default class App extends Vue {
   authenticated: boolean = false
 
-  created(){
+  created() {
     this.isAuthenticated()
   }
 

@@ -15,51 +15,17 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-
-interface Brewery {
-    id: number,
-    name: string,
-    visited: boolean
-}
+import { Action, State } from 'vuex-class'
+import Brewery from '@/models/brewery'
 
 @Component
 export default class Home extends Vue {
-  public breweries: Brewery[] = [
-        {
-            id: 0,
-            name: 'Charleyville Brewery',
-            visited: true,
-        },
-        {
-            id: 1,
-            name: 'O\'Fallon Brewery',
-            visited: true,
-        },
-        {
-            id: 2,
-            name: 'Narrow Guage Brewery',
-            visited: false,
-        },
-        {
-            id: 3,
-            name: 'Narrow Guage Brewery',
-            visited: false,
-        },
-        {
-            id: 4,
-            name: 'Narrow Guage Brewery',
-            visited: false,
-        },
-        {
-            id: 5,
-            name: 'Narrow Guage Brewery',
-            visited: false,
-        },
-        {
-            id: 6,
-            name: 'Narrow Guage Brewery',
-            visited: false,
-        },
-    ]
+
+    @Action fetchBreweries: any
+    @State breweries?: Brewery[]
+
+    async mounted() {
+        await this.fetchBreweries()
+    }
 }
 </script>
