@@ -10,20 +10,20 @@
         </div>
         <div class="" :class="[{'hidden': !expanded, 'block': expanded}, 'w-full', 'flex-grow', 'lg:flex', 'lg:items-center', 'lg:w-auto', 'ease-height-in']">
             <div class="text-sm lg:flex-grow lg:flex lg:justify-start">
-                <a href="#responsive-header" v-if="loggedIn" class="block mt-4 lg:inline-block text-white lg:mt-0 px-4 py-2 hover:text-orange-dark hover:text-white mr-4 no-underline">
+                <router-link to="/past-events" v-if="authenticated" class="block mt-4 lg:inline-block text-white lg:mt-0 px-4 py-2 hover:text-orange-dark hover:text-white mr-4 no-underline">
                     Previous Events
-                </a>
-                <a href="#responsive-header" v-if="loggedIn" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white mr-4 no-underline">
+                </router-link>
+                <a href="#responsive-header" v-if="authenticated" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white mr-4 no-underline">
                     Upcoming Events
                 </a>
-                <a href="#responsive-header" v-if="loggedIn" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
+                <a href="#responsive-header" v-if="authenticated" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
                     Attend an event
                 </a>
             </div>
                 <!-- <a href="#" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 lg:mr-4">Login</a> -->
-                <router-link v-if="!authenticated" to="login" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 lg:mr-4">Login</router-link>
-                <a v-if="!authenticated" href="#" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0">Register</a>
-                <a v-if="authenticated" @click="logout" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0">Log Out</a>
+                <router-link v-if="!authenticated" to="login" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 lg:mr-4 cursor-pointer">Login</router-link>
+                <a v-if="!authenticated" href="#" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 cursor-pointer">Register</a>
+                <a v-if="authenticated" @click="logout" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 cursor-pointer">Log Out</a>
             <div>
             </div>
         </div>

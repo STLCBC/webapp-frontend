@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router, { RouteConfig } from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
+import PastEvents from './views/PastEvents.vue'
 
 import Auth from '@okta/okta-vue'
 
@@ -37,6 +38,13 @@ const router = new Router({
     {
       path: '/login',
       component: Login,
+    },
+    {
+      path: '/past-events',
+      component: PastEvents,
+      meta: {
+        requiresAuth: true,
+      },
     },
   ],
 })
