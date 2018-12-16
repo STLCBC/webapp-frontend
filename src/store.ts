@@ -5,22 +5,46 @@ import Event from './models/event'
 import axios from './server-axios'
 import { Actions, Mutations } from '@/util/vuex-types'
 import moment from 'moment'
+import User from './models/user'
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loggedIn: false,
+    authenticated: false,
+    loggedInUser: {} as User,
     breweries: [] as Brewery[],
     events: [] as Event[],
+    upcomingEvents: [] as Event[],
+    pastEvents: [] as Event[],
+    currentEvents: [] as Event[],
   },
   mutations: {
     [Mutations.SET_BREWERIES](state, breweries) {
       state.breweries = breweries
     },
     [Mutations.SET_EVENTS](state, events) {
+      state.upcomingEvents = []
+      state.pastEvents = []
+      state.currentEvents = []
+      const today = moment()
+      events.forEach((element: Event) => {
+        if (element.at.isAfter(today, 'day')) {
+          state.upcomingEvents.push(element)
+        } else if (element.at.isSame(today, 'day')) {
+          state.currentEvents.push(element)
+        } else {
+          state.upcomingEvents.push(element)
+        }
+      })
       state.events = events
+    },
+    [Mutations.SET_AUTHENTICATED](state, authenticated) {
+      state.authenticated = authenticated
+    },
+    [Mutations.SET_LOGGEDIN_USER](state, user) {
+      state.loggedInUser = user
     },
   },
   actions: {

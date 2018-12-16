@@ -11,6 +11,9 @@
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import Navigation from '@/components/Navigation.vue'
+import { State, Mutation } from 'vuex-class'
+import { Mutations } from '@/util/vuex-types'
+import User from '@/models/user'
 
 @Component({
   components: {
@@ -18,7 +21,11 @@ import Navigation from '@/components/Navigation.vue'
   },
 })
 export default class App extends Vue {
-  authenticated: boolean = false
+  // authenticated: boolean = false
+  @State authenticated!: boolean
+  @State('loggedInUser') user!: User
+  @Mutation(Mutations.SET_AUTHENTICATED) setAuth: any
+  @Mutation(Mutations.SET_LOGGEDIN_USER) setUser: any
 
   created() {
     this.isAuthenticated()
@@ -26,7 +33,21 @@ export default class App extends Vue {
 
   @Watch('$route')
   async isAuthenticated() {
-    this.authenticated = await this.$auth.isAuthenticated()
+    const authenticated = await this.$auth.isAuthenticated()
+    this.setAuth(authenticated)
+    if (!authenticated) {
+      this.setUser({})
+    } else if (Object.keys(this.user).length === 0) {
+      const oktaUser = await this.$auth.getUser()
+      const user: User = {
+        id: 0,
+        firstName: oktaUser.given_name,
+        lastName: oktaUser.family_name,
+        username: oktaUser.email,
+        isAdmin: oktaUser.admin,
+      }
+      this.setUser(user)
+    }
   }
 
 }

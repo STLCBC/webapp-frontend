@@ -5,7 +5,7 @@
             <p class="text-grey-darker text-base">When: {{ formattedDate }}</p>
             <p class="text-grey-darker text-base">Where: {{ event.location }}</p>
         </div>
-        <div class="px-6 py-4">
+        <div class="px-6 py-4" v-if="!upcoming">
             <span v-if="getAverageBeer !== 0" class="inline-block bg-grey-lighter rounded-full mb-2 px-3 py-1 text-sm font-semibold text-grey-darkest mr-2">Avg. Beer rating: {{ getAverageBeer }}</span>
             <span v-if="getAverageExperience !== 0" class="inline-block bg-grey-lighter rounded-full mb-2 px-3 py-1 text-sm font-semibold text-grey-darkest mr-2">Avg. Experience rating: {{ getAverageBeer }}</span>
             <span v-if="event.ratings.length > 0" class="inline-block bg-grey-lighter rounded-full mb-2 px-3 py-1 text-sm font-semibold text-grey-darkest">Number of Attendees: {{ event.ratings.length }} </span>
@@ -24,6 +24,7 @@ import moment from 'moment'
 export default class EventCard extends Vue {
 
     @Prop(Object) event!: Event
+    @Prop({type: Boolean, default: false}) upcoming!: boolean
 
     get getAverageBeer() {
         if (this.event.ratings === undefined || this.event.ratings.length === 0) {

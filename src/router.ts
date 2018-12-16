@@ -3,6 +3,8 @@ import Router, { RouteConfig } from 'vue-router'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import PastEvents from './views/PastEvents.vue'
+import UpcomingEvents from './views/UpcomingEvents.vue'
+import AttendAnEvent from './views/AttendAnEvent.vue'
 
 import Auth from '@okta/okta-vue'
 
@@ -24,14 +26,6 @@ const router = new Router({
       component: Home,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
-    },
-    {
       path: '/implicit/callback',
       component: Auth.handleCallback(),
     },
@@ -42,6 +36,20 @@ const router = new Router({
     {
       path: '/past-events',
       component: PastEvents,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/upcoming-events',
+      component: UpcomingEvents,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/attend-an-event',
+      component: AttendAnEvent,
       meta: {
         requiresAuth: true,
       },

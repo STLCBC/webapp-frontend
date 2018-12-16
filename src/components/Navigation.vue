@@ -13,11 +13,14 @@
                 <router-link to="/past-events" v-if="authenticated" class="block mt-4 lg:inline-block text-white lg:mt-0 px-4 py-2 hover:text-orange-dark hover:text-white mr-4 no-underline">
                     Previous Events
                 </router-link>
-                <a href="#responsive-header" v-if="authenticated" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white mr-4 no-underline">
+                <router-link to="/upcoming-events" v-if="authenticated" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white mr-4 no-underline">
                     Upcoming Events
-                </a>
-                <a href="#responsive-header" v-if="authenticated" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
+                </router-link>
+                <router-link to="/attend-an-event" v-if="authenticated" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
                     Attend an event
+                </router-link>
+                <a href="#responsive-header" v-if="authenticated && user.isAdmin" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
+                    Host an Event
                 </a>
             </div>
                 <!-- <a href="#" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 lg:mr-4">Login</a> -->
@@ -33,12 +36,14 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { State } from 'vuex-class'
+import User from '@/models/user'
 
 
 
 @Component
 export default class Navigation extends Vue {
     @State public loggedIn: any
+    @State('loggedInUser') user!: User
 
     @Prop({default: false}) authenticated!: boolean
 
