@@ -25,7 +25,7 @@
             </div>
                 <!-- <a href="#" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 lg:mr-4">Login</a> -->
                 <router-link v-if="!authenticated" to="login" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 lg:mr-4 cursor-pointer">Login</router-link>
-                <a v-if="!authenticated" href="#" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 cursor-pointer">Register</a>
+                <router-link v-if="!authenticated" to="register" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 cursor-pointer">Register</router-link>
                 <a v-if="authenticated" @click="logout" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 cursor-pointer">Log Out</a>
             <div>
             </div>
@@ -50,6 +50,7 @@ export default class Navigation extends Vue {
     public expanded: boolean = false
 
     async logout() {
+        this.$router.replace('/')
         await this.$auth.logout()
         this.$emit('logout')
     }

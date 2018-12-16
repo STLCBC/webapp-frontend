@@ -7,6 +7,7 @@ import UpcomingEvents from './views/UpcomingEvents.vue'
 import AttendAnEvent from './views/AttendAnEvent.vue'
 import HostEvent from './views/HostEvent.vue'
 import ViewEvent from './views/ViewEvent.vue'
+import Register from './views/Register.vue'
 
 import Auth from '@okta/okta-vue'
 
@@ -34,6 +35,10 @@ const router = new Router({
     {
       path: '/login',
       component: Login,
+    },
+    {
+      path: '/register',
+      component: Register,
     },
     {
       path: '/past-events',
