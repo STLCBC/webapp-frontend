@@ -18,25 +18,11 @@
             </div>
         </div>
         <div v-else>
-            <h3>Please rate {{ event.brewery.name }}</h3>
-            <form action="" @submit.prevent="submitRating">
-                <div class="mb-4">
-                    <label class="block text-grey-darker text-sm font-bold mb-2" for="beer">
-                        Beer Rating
-                    </label>
-                    <input v-model="beer" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="beer" type="number" step="0.5" min="1" max="10" placeholder="Beer">
-                </div>
-                <div class="mb-6">
-                    <label class="block text-grey-darker text-sm font-bold mb-2" for="experience">
-                        Experience Rating
-                    </label>
-                    <input v-model="experience" class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="experience" type="number" step="0.5" min="1" max="10" placeholder="Experience">
-                </div>
-                <button type="submit" class="mb-2 block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-black border-black lg:hover:border-transparent lg:hover:bg-orange-dark mt-4 lg:mt-0 cursor-pointer">
-                    Submit Rating
-                </button>
-            </form>
-            
+            <rate-brewery-form v-if="!breweryRated" :event="event" @rated="breweryRated = true"></rate-brewery-form>
+
+            <div v-if="breweryRated" class="flex items-center bg-green text-white text-sm font-bold px-4 py-3 mt-6" role="alert">
+                <p>Thank you for your rating! Click here to see all other ratings for this event.</p>
+            </div>
         </div>
     </main>
 </template>
@@ -49,17 +35,17 @@ import { State } from 'vuex-class'
 import { QrcodeStream, QrcodeDropZone, QrcodeCapture } from 'vue-qrcode-reader'
 import axios from '@/server-axios'
 import Event from '@/models/event'
+import RateBreweryForm from '@/components/RateBreweryForm.vue'
 
 
 @Component({
     components: {
         'qrcode-stream': QrcodeStream,
+        'rate-brewery-form': RateBreweryForm,
     },
 })
 export default class AttendAnEvent extends Vue {
     code: string = ''
-    beer: number = 0
-    experience: number = 0
     eventFound: boolean = false
     scanningPause: boolean = false
     scanningLoading: boolean = true
@@ -74,6 +60,7 @@ export default class AttendAnEvent extends Vue {
         },
     }
     event?: Event
+    breweryRated = false
 
     async onInit(promise: any) {
         // show loading indicator
@@ -126,10 +113,6 @@ export default class AttendAnEvent extends Vue {
       await this.$nextTick()
 
       this.destroyed = false
-    }
-
-    async submitRating(){
-        // test
     }
 
 }

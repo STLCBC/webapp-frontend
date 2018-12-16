@@ -5,6 +5,7 @@ import Login from './views/Login.vue'
 import PastEvents from './views/PastEvents.vue'
 import UpcomingEvents from './views/UpcomingEvents.vue'
 import AttendAnEvent from './views/AttendAnEvent.vue'
+import HostEvent from './views/HostEvent.vue'
 
 import Auth from '@okta/okta-vue'
 
@@ -50,6 +51,13 @@ const router = new Router({
     {
       path: '/attend-an-event',
       component: AttendAnEvent,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/host-an-event',
+      component: HostEvent,
       meta: {
         requiresAuth: true,
       },
