@@ -6,6 +6,7 @@ import PastEvents from './views/PastEvents.vue'
 import UpcomingEvents from './views/UpcomingEvents.vue'
 import AttendAnEvent from './views/AttendAnEvent.vue'
 import HostEvent from './views/HostEvent.vue'
+import ViewEvent from './views/ViewEvent.vue'
 
 import Auth from '@okta/okta-vue'
 
@@ -62,11 +63,18 @@ const router = new Router({
         requiresAuth: true,
       },
     },
+    {
+      path: '/event/:id',
+      component: ViewEvent,
+      meta: {
+        requiresAuth: true,
+      },
+    },
   ],
 })
 
 const onAuthRequired = async (from: any, to: any, next: any) => {
-  if (from.matched.some((record: RouteConfig) => record.meta.requiresAuth)
+  if (to.matched.some((record: RouteConfig) => record.meta.requiresAuth)
     && !(await Vue.prototype.$auth.isAuthenticated())) {
     // Navigate to custom login page
     next({ path: '/login' })

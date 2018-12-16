@@ -14,6 +14,7 @@ import Navigation from '@/components/Navigation.vue'
 import { State, Mutation } from 'vuex-class'
 import { Mutations } from '@/util/vuex-types'
 import User from '@/models/user'
+import axios from '@/server-axios'
 
 @Component({
   components: {
@@ -27,13 +28,19 @@ export default class App extends Vue {
   @Mutation(Mutations.SET_AUTHENTICATED) setAuth: any
   @Mutation(Mutations.SET_LOGGEDIN_USER) setUser: any
 
-  created() {
-    this.isAuthenticated()
+  async created() {
+    await this.isAuthenticated()
   }
 
   @Watch('$route')
   async isAuthenticated() {
     const authenticated = await this.$auth.isAuthenticated()
+
+    if (authenticated) {
+      const authToken = await this.$auth.getAccessToken()
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + authToken
+    }
+
     this.setAuth(authenticated)
     if (!authenticated) {
       this.setUser({})

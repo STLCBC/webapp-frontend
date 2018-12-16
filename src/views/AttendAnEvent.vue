@@ -21,7 +21,7 @@
             <rate-brewery-form v-if="!breweryRated" :event="event" @rated="breweryRated = true"></rate-brewery-form>
 
             <div v-if="breweryRated" class="flex items-center bg-green text-white text-sm font-bold px-4 py-3 mt-6" role="alert">
-                <p>Thank you for your rating! Click here to see all other ratings for this event.</p>
+                <p>Thank you for your rating! Click <router-link :to="'/event/' + event.id">here</router-link> to see all other ratings for this event.</p>
             </div>
         </div>
     </main>

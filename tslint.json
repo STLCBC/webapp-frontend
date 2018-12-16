@@ -17,6 +17,7 @@
     "no-consecutive-blank-lines": false,
     "semicolon": [true, "never"],
     "member-access": false,
-    "no-console": false
+    "no-console": false,
+    "no-string-literal": false
   }
 }
