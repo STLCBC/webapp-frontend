@@ -35,7 +35,7 @@ export default new Vuex.Store({
         } else if (element.at.isSame(today, 'day')) {
           state.currentEvents.push(element)
         } else {
-          state.upcomingEvents.push(element)
+          state.pastEvents.push(element)
         }
       })
       state.events = events
