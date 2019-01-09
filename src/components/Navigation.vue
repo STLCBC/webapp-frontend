@@ -19,7 +19,7 @@
                 <router-link to="/attend-an-event" v-if="authenticated" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
                     Attend an event
                 </router-link>
-                <router-link to="/host-an-event" v-if="authenticated && user.isAdmin" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
+                <router-link to="/host-an-event" v-if="false" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
                     Host an Event
                 </router-link>
             </div>

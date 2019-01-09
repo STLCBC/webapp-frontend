@@ -31,8 +31,8 @@ export default class EventCard extends Vue {
             return 0
         }
 
-        return this.event.ratings.reduce((accumulator, currentValue) => accumulator + currentValue.beer, 0)
-            / this.event.ratings.length
+        return (this.event.ratings.reduce((accumulator, currentValue) => accumulator + currentValue.beer, 0)
+            / this.event.ratings.length).toFixed(1)
     }
 
     get getAverageExperience() {
@@ -40,8 +40,8 @@ export default class EventCard extends Vue {
             return 0
         }
 
-        return this.event.ratings.reduce((accumulator, currentValue) => accumulator + currentValue.experience, 0)
-            / this.event.ratings.length
+        return (this.event.ratings.reduce((accumulator, currentValue) => accumulator + currentValue.experience, 0)
+            / this.event.ratings.length).toFixed(1)
     }
 
     get formattedDate() {

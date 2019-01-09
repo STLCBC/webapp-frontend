@@ -1,5 +1,5 @@
 <template>
-    <main class="mx-auto container" v-if="event">
+    <main class="mx-auto container text-left" v-if="event">
         <h2 class="mb-2">{{ event.brewery.name }}</h2>
         <h4 class="mb-2">{{ numberOfAttendees }} {{ peopleTerm }} attendeed this event</h4>
         <h4 class="mb-2">{{ formattedDate }}</h4>
@@ -66,7 +66,7 @@ export default class ViewEvent extends Vue {
     }
 
     async beforeRouteUpdate(to: Route, from: Route, next:
-        (to?: RawLocation | false | ((vm: ViewEvent) => any) | void) => void){
+        (to?: RawLocation | false | ((vm: ViewEvent) => any) | void) => void) {
             try {
                 const data = await this.fetchEvent(to)
                 this.event = data
