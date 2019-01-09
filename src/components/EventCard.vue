@@ -2,7 +2,7 @@
     <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4">
             <div class="font-bold text-xl mb-2">
-                <router-link :to="'event/' + event.id" v-if="!upcoming" class="no-underline color:black text-black no-visited">{{ event.brewery.name }}</router-link>
+                <router-link :to="'event/' + event.id" v-if="!upcoming && event.ratings.length > 0" class="no-underline color:black text-black no-visited">{{ event.brewery.name }}</router-link>
                 <span v-else>{{ event.brewery.name }}</span>
             </div>
             <p class="text-grey-darker text-base">When: {{ formattedDate }}</p>
