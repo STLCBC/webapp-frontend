@@ -1,7 +1,10 @@
 <template>
     <div class="max-w-sm rounded overflow-hidden shadow-lg">
         <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">{{ event.brewery.name }}</div>
+            <div class="font-bold text-xl mb-2">
+                <router-link :to="'event/' + event.id" v-if="!upcoming" class="no-underline color:black no-visited">{{ event.brewery.name }}</router-link>
+                <span v-else>{{ event.brewery.name }}</span>
+            </div>
             <p class="text-grey-darker text-base">When: {{ formattedDate }}</p>
             <p class="text-grey-darker text-base">Where: {{ event.location }}</p>
         </div>
