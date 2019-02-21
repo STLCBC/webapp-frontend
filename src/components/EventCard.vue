@@ -8,6 +8,9 @@
             <p class="text-grey-darker text-base">When: {{ formattedDate }}</p>
             <p class="text-grey-darker text-base">Where: {{ event.location }}</p>
         </div>
+        <div class="mt-3 mb-3" v-if="upcoming">
+            <a :href="addToGoogleCalendar" target="_blank" class="inline-block no-underline bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Add to Google Calendar</a>
+        </div>
         <div class="px-6 py-4" v-if="!upcoming">
             <span v-if="getAverageBeer !== 0" class="inline-block bg-grey-lighter rounded-full mb-2 px-3 py-1 text-sm font-semibold text-grey-darkest mr-2">Avg. Beer rating: {{ getAverageBeer }}</span>
             <span v-if="getAverageExperience !== 0" class="inline-block bg-grey-lighter rounded-full mb-2 px-3 py-1 text-sm font-semibold text-grey-darkest mr-2">Avg. Experience rating: {{ getAverageBeer }}</span>
@@ -49,6 +52,18 @@ export default class EventCard extends Vue {
 
     get formattedDate() {
         return this.event.at.format('MMM DD, YYYY hh:mm A')
+    }
+
+    get addToGoogleCalendar() {
+        const title = encodeURIComponent('CBC at ' + this.event.brewery.name)
+        const loc = encodeURIComponent(this.event.location)
+        const startDate = this.event.at.clone()
+        const startDateString = startDate.toISOString().replace(/[-:]|\.\d+/g, '')
+        const endDate = startDate.clone().add(4, 'hours')
+        const endDateString = endDate.toISOString().replace(/[-:]|\.\d+/g, '')
+
+        return 'http://www.google.com/calendar/event?action=TEMPLATE&trp=false&text=' + title +
+            '&details=' + title + '&location=' + loc + '&dates=' + startDateString + '/' + endDateString
     }
 }
 </script>
