@@ -8,6 +8,8 @@ import AttendAnEvent from './views/AttendAnEvent.vue'
 import HostEvent from './views/HostEvent.vue'
 import ViewEvent from './views/ViewEvent.vue'
 import Register from './views/Register.vue'
+import CreateBrewery from './views/CreateBrewery.vue'
+import CreateEvent from './views/CreateEvent.vue'
 
 import Auth from '@okta/okta-vue'
 
@@ -71,6 +73,20 @@ const router = new Router({
     {
       path: '/event/:id',
       component: ViewEvent,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/create-brewery',
+      component: CreateBrewery,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/create-event',
+      component: CreateEvent,
       meta: {
         requiresAuth: true,
       },

@@ -22,6 +22,12 @@
                 <router-link to="/host-an-event" v-if="false" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
                     Host an Event
                 </router-link>
+                <router-link to="/create-brewery" v-if="authenticated && user.isAdmin" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
+                    Create Brewery
+                </router-link>
+                <router-link to="/create-event" v-if="authenticated && user.isAdmin" class="block mt-4 lg:inline-block text-white px-4 py-2 lg:mt-0 hover:text-orange-dark hover:text-white no-underline">
+                    Create Event
+                </router-link>
             </div>
                 <!-- <a href="#" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 lg:mr-4">Login</a> -->
                 <router-link v-if="!authenticated" to="login" class="block no-underline lg:inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:bg-orange-dark mt-4 lg:mt-0 lg:mr-4 cursor-pointer">Login</router-link>
